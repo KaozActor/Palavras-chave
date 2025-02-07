@@ -43,7 +43,7 @@
             border-radius: 4px;
             border: 1px solid #dee2e6;
         }
-        #resultado img {
+        #resultado img, #resultado video {
             max-width: 100%;
             height: auto;
             margin-top: 10px;
@@ -87,18 +87,21 @@
         const palavrasChave = {
             'kazuki': {
                 link: 'https://youtu.be/ES0K7y-7XY4?si=szPKjRTzlhYrByBq',
-                imagem: null,
-                audio: null
+                imagem: 'assets/imagens/kazuki.jpg', // Imagem local
+                audio: 'assets/audios/kazuki.mp3', // Áudio local
+                video: 'assets/videos/kazuki.mp4' // Vídeo local
             },
             'inumaki': {
                 link: 'https://youtu.be/4grxuKUEeT8?si=YTKFCJvLohpJ_yjI',
-                imagem: 'assets/imagens/inumaki.jpeg', // Sem imagem
-                audio: 'assets/audios/inumaki.mp3'
+                imagem: null, // Sem imagem
+                audio: 'assets/audios/inumaki.mp3', // Áudio local, se necessário
+                video: 'assets/videos/inumaki.mp4' // Vídeo local
             },
             'foo': {
                 link: 'https://example.com',
                 imagem: null,
-                audio: null // Sem imagem e áudio
+                audio: null, // Sem imagem e áudio
+                video: null // Sem vídeo
             }
             // Adicione mais palavras conforme necessário
         };
@@ -113,7 +116,7 @@
             resultado.innerHTML = ''; // Limpa o resultado anterior
 
             if (palavrasChave[palavra]) {
-                const { link, imagem, audio } = palavrasChave[palavra];
+                const { link, imagem, audio, video } = palavrasChave[palavra];
 
                 resultado.innerHTML += `<p>Link para o conteúdo: <a href="${link}" target="_blank">Acessar</a></p>`;
 
@@ -127,6 +130,15 @@
                             <source src="${audio}" type="audio/mpeg">
                             Seu navegador não suporta o elemento de áudio.
                         </audio>
+                    `;
+                }
+
+                if (video) {
+                    resultado.innerHTML += `
+                        <video controls>
+                            <source src="${video}" type="video/mp4">
+                            Seu navegador não suporta o formato de vídeo.
+                        </video>
                     `;
                 }
 
